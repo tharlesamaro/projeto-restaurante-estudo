@@ -11,7 +11,10 @@
 
 <hr>
 
-<form action="">
+<form action="{{ route('restaurant.store') }}" method="post">
+
+    {{ csrf_field() }}
+
     <p>
         <label for="name">Nome do restaurante:</label> <br>
         <input type="text" name="name" id="name">

@@ -12,8 +12,13 @@ class RestaurantController extends Controller
         return __CLASS__;
     }
 
-    public function store()
+    public function new()
     {
         return view('admin.restaurant.store');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 }
