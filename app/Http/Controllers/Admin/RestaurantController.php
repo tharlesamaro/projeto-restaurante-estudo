@@ -10,7 +10,8 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        return Restaurant::all();
+        $restaurants = Restaurant::all();
+        return view('admin.restaurant.index', compact('restaurants'));
     }
 
     public function new()
@@ -35,11 +36,19 @@ class RestaurantController extends Controller
 
     public function update(Request $request, $id)
     {
-        $restauranteData = $request->all();
+        $restaurantData = $request->all();
 
-        $restaurante = Restaurant::findOrFail($id);
-        $restaurante->update($restauranteData);
+        $restaurant = Restaurant::findOrFail($id);
+        $restaurant->update($restaurantData);
 
         print 'Restaurante atualizado com sucesso';
+    }
+
+    public function delete($id)
+    {
+        $restaurant = Restaurant::findOrFail($id);
+        $restaurant->delete();
+
+        print 'Restaurante deletado com sucesso';
     }
 }
