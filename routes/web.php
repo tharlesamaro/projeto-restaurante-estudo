@@ -24,3 +24,7 @@ Route::prefix('admin')->group(function () {
     Route::post('restaurants/store', 'Admin\\RestaurantController@store')->name('restaurant.store');
     Route::post('restaurants/update/{id}', 'Admin\\RestaurantController@update')->name('restaurant.update');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
