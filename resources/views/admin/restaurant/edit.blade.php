@@ -27,10 +27,8 @@
 
     <p>
         <label for="description">Fale sobre o restaurante:</label> <br>
-        <textarea name="description" id="description" cols="30" rows="10">
-            {{ $restaurant->description }}
-        </te    xtarea>
+        <textarea name="description" id="description" cols="30" rows="10">{{ $restaurant->description }}</textarea>
     </p>
 
-    <button type="submit">Cadastrar</button>
+    <button type="submit">Atualizar</button>
 </form>

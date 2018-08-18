@@ -30,11 +30,16 @@ class RestaurantController extends Controller
 
     public function edit(Restaurant $restaurant)
     {
-        return view('admin.restaurant.edit', compact($restaurant));
+        return view('admin.restaurant.edit', compact('restaurant'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        return __METHOD__;
+        $restauranteData = $request->all();
+
+        $restaurante = Restaurant::findOrFail($id);
+        $restaurante->update($restauranteData);
+
+        print 'Restaurante atualizado com sucesso';
     }
 }
