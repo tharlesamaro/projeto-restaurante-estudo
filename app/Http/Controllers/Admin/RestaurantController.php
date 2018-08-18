@@ -27,4 +27,14 @@ class RestaurantController extends Controller
 
         print 'Restaurante criado com sucesso!';
     }
+
+    public function edit(Restaurant $restaurant)
+    {
+        return view('admin.restaurant.edit', compact($restaurant));
+    }
+
+    public function update(Request $request)
+    {
+        return __METHOD__;
+    }
 }

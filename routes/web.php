@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('restaurant', 'Admin\\RestaurantController@index')->name('restaurant.index');
-    Route::get('restaurant/new', 'Admin\\RestaurantController@new')->name('restaurant.new');
-    Route::post('restaurant/store', 'Admin\\RestaurantController@store')->name('restaurant.store');
+    Route::get('restaurants', 'Admin\\RestaurantController@index')->name('restaurant.index');
+    Route::get('restaurants/new', 'Admin\\RestaurantController@new')->name('restaurant.new');
+    Route::get('restaurants/edit/{id}', 'Admin\\RestaurantController@edit')->name('restaurant.edit');
+    Route::get('restaurants/update/{id}', 'Admin\\RestaurantController@edit')->name('restaurant.update');
+
+    Route::post('restaurants/store', 'Admin\\RestaurantController@store')->name('restaurant.store');
+
 });
