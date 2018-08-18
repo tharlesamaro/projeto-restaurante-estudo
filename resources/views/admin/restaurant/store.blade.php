@@ -11,27 +11,22 @@
 
 <hr>
 
-{{--{{ var_dump($errors->all()) }}--}}
-
 <form action="{{ route('restaurant.store') }}" method="post">
 
     {{ csrf_field() }}
 
     <p>
         <label for="name">Nome do restaurante:</label> <br>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" value="{{ old('name') }}">
         <br>
         @if($errors->has('name'))
-            {{--@foreach($errors->get('name') as $erro)--}}
-                {{--{{ $erro }}--}}
-            {{--@endforeach--}}
             {{ $errors->first('name') }}
         @endif
     </p>
 
     <p>
         <label for="address">Endereço:</label> <br>
-        <input type="text" name="address" id="address">
+        <input type="text" name="address" id="address" value="{{ old('address') }}">
         <br>
         @if($errors->has('address'))
             {{ $errors->first('address') }}
@@ -40,7 +35,7 @@
 
     <p>
         <label for="description">Fale sobre o restaurante:</label> <br>
-        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+        <textarea name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
         <br>
         @if($errors->has('description'))
             {{ $errors->first('description') }}
