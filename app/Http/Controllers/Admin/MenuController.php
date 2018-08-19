@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Restaurant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Menu;
@@ -17,7 +18,8 @@ class MenuController extends Controller
 
     public function new()
     {
-        return view('admin.menus.store');
+        $restaurants = Restaurant::all(['id', 'name']);
+        return view('admin.menus.store', compact('restaurants'));
     }
 
     public function store(MenuRequest $request)
@@ -28,8 +30,8 @@ class MenuController extends Controller
 
         try {
 
-            $menu = new Menu();
-            $menu->create($menuData);
+            $restaurant = Restaurant::findOrFail($menuData['restaurant_id']);
+            $restaurant->menus()->create($menuData);
 
             flash('Menu criado com sucesso!')->success();
 
@@ -42,7 +44,8 @@ class MenuController extends Controller
 
     public function edit(Menu $menu)
     {
-        return view('admin.menus.edit', compact('menu'));
+        $restaurants = Restaurant::all(['id', 'name']);
+        return view('admin.menus.edit', compact('menu', 'restaurants'));
     }
 
     public function update(MenuRequest $request, $id)
@@ -53,8 +56,8 @@ class MenuController extends Controller
 
         try {
 
-            $menu = Menu::findOrFail($id);
-            $menu->update($menuData);
+            $restaurant = Restaurant::findOrFail($menuData['restaurant_id']);
+            $restaurant->menus()->update($menuData);
 
             flash('Menu atualizado com sucesso!')->success();
 
@@ -62,7 +65,7 @@ class MenuController extends Controller
             flash('Erro ao tentar atualizar o menu!')->error();
         }
 
-        return redirect()->route('menu.edit', ['id' => $menu->id]);
+        return redirect()->route('menu.edit', ['id' => $id]);
     }
 
     public function delete($id)
