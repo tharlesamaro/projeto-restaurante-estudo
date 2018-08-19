@@ -18,7 +18,7 @@ class MenuController extends Controller
 
     public function new()
     {
-        $restaurants = Restaurant::all(['id', 'name']);
+        $restaurants = Auth::user()->restaurants;
         return view('admin.menus.store', compact('restaurants'));
     }
 
@@ -44,7 +44,7 @@ class MenuController extends Controller
 
     public function edit(Menu $menu)
     {
-        $restaurants = Restaurant::all(['id', 'name']);
+        $restaurants = Auth::user()->restaurants;
         return view('admin.menus.edit', compact('menu', 'restaurants'));
     }
 
