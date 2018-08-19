@@ -1,46 +1,49 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: tharles
- * Date: 16/08/18
- * Time: 23:05
- */
-?>
+@extends('layouts.app')
+@section('content')
+    <h1>Inserção de Restaurante</h1>
 
-<h1>Inserção de Restaurante</h1>
+    <hr>
 
-<hr>
+    <form action="{{ route('restaurant.store') }}" method="post">
 
-<form action="{{ route('restaurant.store') }}" method="post">
+        {{ csrf_field() }}
 
-    {{ csrf_field() }}
+        <p class="form-group">
+            <label for="name">Nome do restaurante:</label> <br>
+            <input type="text" name="name" id="name" value="{{ old('name') }}"
+                   class="form-control @if($errors->has('name')) is-invalid @endif">
 
-    <p>
-        <label for="name">Nome do restaurante:</label> <br>
-        <input type="text" name="name" id="name" value="{{ old('name') }}">
-        <br>
-        @if($errors->has('name'))
-            {{ $errors->first('name') }}
-        @endif
-    </p>
+            @if($errors->has('name'))
+                <span class="invalid-feedback">
+                    {{ $errors->first('name') }}
+                </span>
+            @endif
+        </p>
 
-    <p>
-        <label for="address">Endereço:</label> <br>
-        <input type="text" name="address" id="address" value="{{ old('address') }}">
-        <br>
-        @if($errors->has('address'))
-            {{ $errors->first('address') }}
-        @endif
-    </p>
+        <p class="form-group">
+            <label for="address">Endereço:</label> <br>
+            <input type="text" name="address" id="address" value="{{ old('address') }}"
+                   class="form-control @if($errors->has('address')) is-invalid @endif">
 
-    <p>
-        <label for="description">Fale sobre o restaurante:</label> <br>
-        <textarea name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
-        <br>
-        @if($errors->has('description'))
-            {{ $errors->first('description') }}
-        @endif
-    </p>
+            @if($errors->has('address'))
+                <span class="invalid-feedback">
+                    {{ $errors->first('address') }}
+                </span>
+            @endif
+        </p>
 
-    <button type="submit">Cadastrar</button>
-</form>
+        <p class="form-group">
+            <label for="description">Fale sobre o restaurante:</label> <br>
+            <textarea name="description" id="description" cols="30" rows="10"
+                      class="form-control @if($errors->has('description')) is-invalid @endif">{{ old('description') }}</textarea>
+
+            @if($errors->has('description'))
+                <span class="invalid-feedback">
+                    {{ $errors->first('description') }}
+                </span>
+            @endif
+        </p>
+
+        <button type="submit" class="btn btn-success btn-lg">Cadastrar</button>
+    </form>
+@endsection
