@@ -9,6 +9,7 @@
         <tr>
             <th>#</th>
             <th>Nome</th>
+            <th>Restaurante</th>
             <th>Criado em</th>
             <th>Ações</th>
         </tr>
@@ -19,6 +20,11 @@
             <tr>
                 <td>{{ $menu->id }}</td>
                 <td>{{ $menu->name }}</td>
+                <td>
+                    <a href="{{ route('restaurant.edit', ['restaurant' => $menu->restaurant->id]) }}">
+                        {{ $menu->restaurant->name }}
+                    </a>
+                </td>
                 <td>{{ $menu->created_at }}</td>
                 <td>
                     <a href="{{ route('menu.edit', ['menu' => $menu->id]) }}"

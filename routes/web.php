@@ -55,3 +55,9 @@ Route::group(['middleware' => ['auth']], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('rel', function () {
+    $restaurant = \App\Restaurant::find(1);
+
+    dd($restaurant->menus);
+});
