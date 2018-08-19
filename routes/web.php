@@ -15,15 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('restaurants', 'Admin\\RestaurantController@index')->name('restaurant.index');
-    Route::get('restaurants/new', 'Admin\\RestaurantController@new')->name('restaurant.new');
-    Route::get('restaurants/edit/{restaurant}', 'Admin\\RestaurantController@edit')->name('restaurant.edit');
-    Route::get('restaurants/remove/{id}', 'Admin\\RestaurantController@delete')->name('restaurant.remove');
+Route::group(['middleware' => ['auth']], function () {
 
-    Route::post('restaurants/store', 'Admin\\RestaurantController@store')->name('restaurant.store');
-    Route::post('restaurants/update/{id}', 'Admin\\RestaurantController@update')->name('restaurant.update');
+    Route::prefix('admin')->group(function () {
+        Route::get('restaurants', 'Admin\\RestaurantController@index')->name('restaurant.index');
+        Route::get('restaurants/new', 'Admin\\RestaurantController@new')->name('restaurant.new');
+        Route::get('restaurants/edit/{restaurant}', 'Admin\\RestaurantController@edit')->name('restaurant.edit');
+        Route::get('restaurants/remove/{id}', 'Admin\\RestaurantController@delete')->name('restaurant.remove');
+
+        Route::post('restaurants/store', 'Admin\\RestaurantController@store')->name('restaurant.store');
+        Route::post('restaurants/update/{id}', 'Admin\\RestaurantController@update')->name('restaurant.update');
+    });
 });
+
 
 Auth::routes();
 
