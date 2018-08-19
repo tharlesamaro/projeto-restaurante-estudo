@@ -26,6 +26,8 @@ class UserController extends Controller
 
         $request->validated();
 
+        $userData['password'] = bcrypt($userData['password']);
+
         $user = new User();
         $user->create($userData);
 
@@ -42,6 +44,8 @@ class UserController extends Controller
         $userData = $request->all();
 
         $request->validated();
+
+        $userData['password'] = bcrypt($userData['password']);
 
         $user = User::findOrFail($id);
         $user->update($userData);
