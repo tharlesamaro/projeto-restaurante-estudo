@@ -22,14 +22,22 @@ class RestaurantController extends Controller
 
     public function store(RestaurantRequest $request)
     {
-        $restaurantData = $request->all();
-
         $request->validated();
 
-        $restaurant = new Restaurant();
-        $restaurant->create($restaurantData);
+        $restaurantData = $request->all();
 
-        print 'Restaurante criado com sucesso!';
+        try {
+
+            $restaurant = new Restaurant();
+            $restaurant->create($restaurantData);
+
+            flash('Restaurante criado com sucesso!')->success();
+
+        } catch (\Exception $e) {
+            flash('Erro ao tentar cadastrar restaurante!')->error();
+        }
+
+        return redirect()->route('restaurant.index');
     }
 
     public function edit(Restaurant $restaurant)
@@ -39,21 +47,37 @@ class RestaurantController extends Controller
 
     public function update(RestaurantRequest $request, $id)
     {
-        $restaurantData = $request->all();
-
         $request->validated();
 
-        $restaurant = Restaurant::findOrFail($id);
-        $restaurant->update($restaurantData);
+        $restaurantData = $request->all();
 
-        print 'Restaurante atualizado com sucesso';
+        try {
+
+            $restaurant = Restaurant::findOrFail($id);
+            $restaurant->update($restaurantData);
+
+            flash('Restaurante atualizado com sucesso!')->success();
+
+        } catch (\Exception $e) {
+            flash('Erro ao tentar atualizar o restaurante!')->error();
+        }
+
+        return redirect()->route('restaurant.edit', ['id' => $restaurant->id]);
     }
 
     public function delete($id)
     {
-        $restaurant = Restaurant::findOrFail($id);
-        $restaurant->delete();
+        try {
 
-        print 'Restaurante deletado com sucesso';
+            $restaurant = Restaurant::findOrFail($id);
+            $restaurant->delete();
+
+            flash('Restaurante deletado com sucesso!')->success();
+
+        } catch (\Exception $e) {
+            flash('Erro ao deletar restaurante!')->error();
+        }
+
+        return redirect()->route('restaurant.index');
     }
 }

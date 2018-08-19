@@ -31,7 +31,9 @@ class UserController extends Controller
         $user = new User();
         $user->create($userData);
 
-        print 'Usuário criado com sucesso!';
+        flash('Usuário criado com sucesso!')->success();
+
+        return redirect()->route('usuario.index');
     }
 
     public function edit(User $user)

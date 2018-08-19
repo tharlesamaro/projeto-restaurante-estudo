@@ -38,6 +38,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('store', 'UserController@store')->name('user.store');
             Route::post('update/{id}', 'UserController@update')->name('user.update');
         });
+
+        Route::prefix('menus')->group(function () {
+            Route::get('/', 'MenuController@index')->name('menu.index');
+            Route::get('new', 'MenuController@new')->name('menu.new');
+            Route::get('edit/{menu}', 'MenuController@edit')->name('menu.edit');
+            Route::get('remove/{id}', 'MenuController@delete')->name('menu.remove');
+
+            Route::post('store', 'MenuController@store')->name('menu.store');
+            Route::post('update/{id}', 'MenuController@update')->name('menu.update');
+        });
     });
 });
 
