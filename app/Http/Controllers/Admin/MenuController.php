@@ -56,8 +56,9 @@ class MenuController extends Controller
 
         try {
 
-            $restaurant = Restaurant::findOrFail($menuData['restaurant_id']);
-            $restaurant->menus()->update($menuData);
+            $menu = Menu::findOrFail($id);
+            $menu->restaurant()->associate($menuData['restaurant_id']);
+            $menu->update($menuData);
 
             flash('Menu atualizado com sucesso!')->success();
 
