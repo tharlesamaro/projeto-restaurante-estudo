@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTableMenu extends Migration
+class AlterTableMenuAddForeignRestaurant extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AlterTableMenu extends Migration
      */
     public function up()
     {
-        Schema::table('menu', function (Blueprint $table) {
-            $table->rename('menus');
+        Schema::table('menus', function (Blueprint $table) {
+            $table->integer('restaurant_id')->unsigned();
+            $table->foreign('restaurant_id')->references('id')->on('restaurants');
         });
     }
 
@@ -26,7 +27,8 @@ class AlterTableMenu extends Migration
     public function down()
     {
         Schema::table('menus', function (Blueprint $table) {
-            $table->rename('menu');
+            $table->dropForeign('restaurant_id');
+            $table->dropColumn('restaurant_id');
         });
     }
 }

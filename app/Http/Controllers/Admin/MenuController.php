@@ -31,7 +31,7 @@ class MenuController extends Controller
             $menu = new Menu();
             $menu->create($menuData);
 
-            flash('Menucriado com sucesso!')->success();
+            flash('Menu criado com sucesso!')->success();
 
         } catch (\Exception $e) {
             flash('Erro ao tentar cadastrar menu!')->error();
